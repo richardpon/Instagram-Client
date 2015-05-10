@@ -40,10 +40,12 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         }
 
         // lookup views for populating the data (image, caption)
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
 
         // Insert the item data into each of the view items
+        tvUsername.setText(photo.username);
         tvCaption.setText(photo.caption);
 
         // Clear out image view (if recycled)
