@@ -1,7 +1,9 @@
 package com.codepath.instagramclient;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -11,14 +13,25 @@ import java.util.ArrayList;
 
 public class PhotosActivity extends ActionBarActivity {
 
+    private final static String TAG = "PhotosActivity";
     public ArrayList<InstagramPhoto> photos;
     public InstagramPhotosAdapter aPhotos;
     private InstagramNetworkClient instagramNetworkClient;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                instagramNetworkClient.fetchPopularPhotos();
+            }
+        });
 
         photos = new ArrayList<>();
 
@@ -42,11 +55,22 @@ public class PhotosActivity extends ActionBarActivity {
      * @param newPhotos ArrayList<InstagramPhoto>
      */
     public void addPhotos(ArrayList<InstagramPhoto> newPhotos) {
+
+        // Clear any previous photos
+        aPhotos.clear();
+
+        // Add new photos
         for (int i = 0 ; i < newPhotos.size() ; i++) {
             photos.add(newPhotos.get(i));
+
+            Log.i(TAG, "author="+newPhotos.get(i).username);
         }
 
+        // Tell adapter that there is new data
         aPhotos.notifyDataSetChanged();
+
+        // Done refreshing (if applicable)
+        swipeContainer.setRefreshing(false);
     }
 
     @Override
