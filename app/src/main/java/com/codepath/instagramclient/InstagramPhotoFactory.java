@@ -61,6 +61,10 @@ public class InstagramPhotoFactory {
         return photo;
     }
 
+    /**
+     * Debugging only, for creating fake photos
+     * @return
+     */
     public ArrayList<InstagramPhoto> getFakePhotos() {
         ArrayList<InstagramPhoto> photos = new ArrayList<InstagramPhoto>();
 

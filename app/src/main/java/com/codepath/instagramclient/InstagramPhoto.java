@@ -12,6 +12,10 @@ public class InstagramPhoto {
     public int imageHeight;
     public int numLikes;
 
+    /**
+     * What string the likes should output. This calculates where the "," should go, if needed
+     * @return String
+     */
     public String likesString() {
 
         int thousands = numLikes / 1000;

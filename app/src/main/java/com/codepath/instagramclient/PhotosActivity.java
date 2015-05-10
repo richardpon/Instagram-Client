@@ -22,17 +22,10 @@ public class PhotosActivity extends ActionBarActivity {
 
         photos = new ArrayList<>();
 
-        //debug
-        //InstagramPhotoFactory factory = new InstagramPhotoFactory();
-        //photos = factory.getFakePhotos();
-        //end debug
-
-
         instagramNetworkClient = new InstagramNetworkClient(this);
 
         // Create adapter and link to source
         aPhotos = new InstagramPhotosAdapter(this, photos);
-
 
         // Find the listview
         ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos);
@@ -40,23 +33,14 @@ public class PhotosActivity extends ActionBarActivity {
         // Set the adapter binding to listView
         lvPhotos.setAdapter(aPhotos);
 
-
-
-
         //fetch photos
-//        InstagramPhotoFactory factory = new InstagramPhotoFactory();
-//        ArrayList<InstagramPhoto> newPhotos = factory.getFakePhotos();
-
-//        for (int i = 0 ; i < newPhotos.size() ; i++) {
-//            photos.add(newPhotos.get(i));
-//        }
-        //photos = factory.getFakePhotos();
-
-
-//        aPhotos.notifyDataSetChanged(); //normally in callback
         instagramNetworkClient.fetchPopularPhotos();
     }
 
+    /**
+     * Callback for fetching popular photos
+     * @param newPhotos ArrayList<InstagramPhoto>
+     */
     public void addPhotos(ArrayList<InstagramPhoto> newPhotos) {
         for (int i = 0 ; i < newPhotos.size() ; i++) {
             photos.add(newPhotos.get(i));
@@ -64,8 +48,6 @@ public class PhotosActivity extends ActionBarActivity {
 
         aPhotos.notifyDataSetChanged();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -38,8 +38,8 @@ public class InstagramNetworkClient {
         AsyncHttpClient client = new AsyncHttpClient();
 
         client.get(url, null, new JsonHttpResponseHandler() {
-            //onSuccess (worked! 200)
 
+            //onSuccess (worked! 200)
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //expecting a JSON object
@@ -58,8 +58,6 @@ public class InstagramNetworkClient {
                 }
 
                 PhotosActivity photosActivity = (PhotosActivity) context;
-                //photosActivity.photos = photos;
-                //photosActivity.aPhotos.notifyDataSetChanged();
                 photosActivity.addPhotos(photos);
             }
 
