@@ -43,10 +43,12 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+        TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
 
         // Insert the item data into each of the view items
         tvUsername.setText(photo.username);
+        tvLikes.setText(photo.likesString());
         tvCaption.setText(photo.caption);
 
         // IMAGES
