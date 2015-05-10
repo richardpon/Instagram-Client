@@ -26,10 +26,21 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
     //Use template to display each photo
 
 
+    private static class ViewHolder {
+        ImageView profile;
+        TextView username;
+        ImageView photo;
+        TextView likes;
+        TextView caption;
+    }
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // get data item for position
         InstagramPhoto photo = getItem(position);
+
+        ViewHolder viewHolder;
 
         // Check if using recycled view, if not inflate
         if (convertView == null) {
@@ -37,27 +48,34 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             // create within parent container
             // false->don't attach to parent
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
+
+            // lookup views for populating the data (image, caption)
+
+            //viewHolder
+            viewHolder = new ViewHolder();
+            viewHolder.profile = (ImageView) convertView.findViewById(R.id.ivProfile);
+            viewHolder.username = (TextView) convertView.findViewById(R.id.tvUsername);
+            viewHolder.photo = (ImageView) convertView.findViewById(R.id.ivPhoto);
+            viewHolder.likes = (TextView) convertView.findViewById(R.id.tvLikes);
+            viewHolder.caption = (TextView) convertView.findViewById(R.id.tvCaption);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        // lookup views for populating the data (image, caption)
-        ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
-        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
-        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
-        TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-
         // Insert the item data into each of the view items
-        tvUsername.setText(photo.username);
-        tvLikes.setText(photo.likesString());
-        tvCaption.setText(photo.caption);
+        viewHolder.username.setText(photo.username);
+        viewHolder.likes.setText(photo.likesString());
+        viewHolder.caption.setText(photo.caption);
 
         // IMAGES
         // Clear out image view (if recycled)
-        ivProfile.setImageResource(0);
-        ivPhoto.setImageResource(0);
+        viewHolder.profile.setImageResource(0);
+        viewHolder.photo.setImageResource(0);
+
         // Insert image using picasso
-        Picasso.with(getContext()).load(photo.userProfilePictureUrl).placeholder(R.drawable.profile).into(ivProfile);
-        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.ic_instagram).into(ivPhoto);
+        Picasso.with(getContext()).load(photo.userProfilePictureUrl).placeholder(R.drawable.profile).into(viewHolder.profile);
+        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.ic_instagram).into(viewHolder.photo);
 
         // Return the created item as a view
         return convertView;
