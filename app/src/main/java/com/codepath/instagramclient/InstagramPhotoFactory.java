@@ -9,6 +9,13 @@ import java.util.ArrayList;
 
 public class InstagramPhotoFactory {
 
+
+    //                -Response:
+//                - TYPE: {"data" => [x] => "type"} ("image" or "video")
+//                - caption: {"data" => [x] => "caption" => "text"}
+//                - url: {"data" => [x] => "images" => "standard_resolution" => "url"}
+//                - username: {"data" => [x] => "user" => "username"}
+//                - profile_picture: {"data" => [x] => "user" => "profile_picture"}
     public ArrayList<InstagramPhoto> getInstagramPhotosFromJsonArray(JSONArray photosJSON) {
 
         ArrayList<InstagramPhoto> photos = new ArrayList<>();
@@ -41,6 +48,8 @@ public class InstagramPhotoFactory {
         InstagramPhoto photo = new InstagramPhoto();
         try {
             photo.username = photoJSON.getJSONObject("user").getString("username");
+            photo.userProfilePictureUrl = photoJSON.getJSONObject("user").getString("profile_picture");
+
             photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
             photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
             photo.caption = photoJSON.getJSONObject("caption").getString("text");

@@ -2,7 +2,6 @@ package com.codepath.instagramclient;
 
 
 import android.content.Context;
-import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -44,15 +43,6 @@ public class InstagramNetworkClient {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //expecting a JSON object
-//                -Response:
-//                - TYPE: {"data" => [x] => "type"} ("image" or "video")
-//                - caption: {"data" => [x] => "caption" => "text"}
-//                - url: {"data" => [x] => "images" => "standard_resolution" => "url"}
-//                - username: {"data" => [x] => "user" => "username"}
-                Log.i(TAG, response.toString());
-
-                //iterate each item and decode into Java object
-
 
                 try {
 
