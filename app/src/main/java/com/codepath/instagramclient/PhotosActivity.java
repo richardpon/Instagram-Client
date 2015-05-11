@@ -3,7 +3,6 @@ package com.codepath.instagramclient;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -62,8 +61,6 @@ public class PhotosActivity extends ActionBarActivity {
         // Add new photos
         for (int i = 0 ; i < newPhotos.size() ; i++) {
             photos.add(newPhotos.get(i));
-
-            Log.i(TAG, "author="+newPhotos.get(i).username);
         }
 
         // Tell adapter that there is new data

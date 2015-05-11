@@ -29,6 +29,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
     private static class ViewHolder {
         ImageView profile;
         TextView username;
+        TextView createdTime;
         ImageView photo;
         TextView likes;
         TextView caption;
@@ -55,6 +56,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             viewHolder = new ViewHolder();
             viewHolder.profile = (ImageView) convertView.findViewById(R.id.ivProfile);
             viewHolder.username = (TextView) convertView.findViewById(R.id.tvUsername);
+            viewHolder.createdTime = (TextView) convertView.findViewById(R.id.tvCreatedTime);
             viewHolder.photo = (ImageView) convertView.findViewById(R.id.ivPhoto);
             viewHolder.likes = (TextView) convertView.findViewById(R.id.tvLikes);
             viewHolder.caption = (TextView) convertView.findViewById(R.id.tvCaption);
@@ -65,6 +67,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         // Insert the item data into each of the view items
         viewHolder.username.setText(photo.username);
+        viewHolder.createdTime.setText(photo.createdTimeString());
         viewHolder.likes.setText(photo.likesString());
         viewHolder.caption.setText(photo.caption);
 
