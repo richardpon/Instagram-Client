@@ -59,7 +59,7 @@ public class InstagramPhoto {
 
         //Convert GMT to PST
         int diffLocal = diff - 60 * 60 * 7;
-q
+
         //calculate display time
         return getDisplayTime(diffLocal);
     }
