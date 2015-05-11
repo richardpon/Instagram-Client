@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class InstagramPhotoFactory {
+    private final static String TAG = "InstagramPhotoFactory";
 
 
     //                -Response:
@@ -16,6 +17,7 @@ public class InstagramPhotoFactory {
 //                - url: {"data" => [x] => "images" => "standard_resolution" => "url"}
 //                - username: {"data" => [x] => "user" => "username"}
 //                - profile_picture: {"data" => [x] => "user" => "profile_picture"}
+//                - created_time: {"data" => [x] => "created_time"}
     public ArrayList<InstagramPhoto> getInstagramPhotosFromJsonArray(JSONArray photosJSON) {
 
         ArrayList<InstagramPhoto> photos = new ArrayList<>();
@@ -45,6 +47,7 @@ public class InstagramPhotoFactory {
      * @return
      */
     private InstagramPhoto getInstgramPhotoFromJsonObject(JSONObject photoJSON) {
+
         InstagramPhoto photo = new InstagramPhoto();
         try {
             photo.username = photoJSON.getJSONObject("user").getString("username");
@@ -54,33 +57,12 @@ public class InstagramPhotoFactory {
             photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
             photo.caption = photoJSON.getJSONObject("caption").getString("text");
             photo.numLikes = photoJSON.getJSONObject("likes").getInt("count");
+            photo.createdTime = photoJSON.getInt("created_time");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         return photo;
-    }
-
-    /**
-     * Debugging only, for creating fake photos
-     * @return
-     */
-    public ArrayList<InstagramPhoto> getFakePhotos() {
-        ArrayList<InstagramPhoto> photos = new ArrayList<InstagramPhoto>();
-
-        InstagramPhoto photo1 = new InstagramPhoto();
-        photo1.caption = "photo 1";
-        photos.add(photo1);
-
-        InstagramPhoto photo2 = new InstagramPhoto();
-        photo2.caption = "photo 2";
-        photos.add(photo2);
-
-        InstagramPhoto photo3 = new InstagramPhoto();
-        photo3.caption = "photo 3";
-        photos.add(photo3);
-
-        return photos;
     }
 
 }

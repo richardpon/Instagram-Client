@@ -45,7 +45,6 @@ public class InstagramNetworkClient {
                 //expecting a JSON object
 
                 try {
-
                     JSONArray photosJSON = null;
                     //array of posts
                     photosJSON = response.getJSONArray("data");
